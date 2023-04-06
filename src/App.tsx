@@ -23,7 +23,6 @@ function App() {
   return (
     <div className="Ap">
       <h1 className="text-4xl">Google Translate Clone</h1>
-      {/* <div className="sm:grid sm:grid-cols-3 sm:w-4/5 sm:m-auto"> */}
       <div className="sm:flex">
         <div className='sm:grow'>
           {/* <h2 className='text-xl font-bold'>From</h2> */}
