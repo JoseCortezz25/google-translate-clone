@@ -1,48 +1,66 @@
 import './App.css'
 import { ArrowIcon } from './components/Icons'
 import { LanguageSelector } from './components/LanguageSelector'
+import { TextArea } from './components/TextArea'
 import { AUTO_LANGUAGE } from './contants'
 import { useStore } from './hooks/useStore'
 import { SectionType } from './types.d'
 
 function App() {
-  const { fromLanguage, toLanguage, interchangeLanguages, setFromLanguage, setToLanguage } = useStore()
+  const {
+    fromLanguage,
+    toLanguage,
+    interchangeLanguages,
+    setFromLanguage,
+    setToLanguage,
+    fromText,
+    result,
+    setFromText,
+    setResult,
+    loading
+  } = useStore()
 
   return (
     <div className="Ap">
       <h1 className="text-4xl">Google Translate Clone</h1>
-      <div className="grid grid-cols-3 w-4/5 m-auto">
-        <div>
-          <h2 className='text-xl font-bold'>From</h2>
+      {/* <div className="sm:grid sm:grid-cols-3 sm:w-4/5 sm:m-auto"> */}
+      <div className="sm:flex">
+        <div className='sm:grow'>
+          {/* <h2 className='text-xl font-bold'>From</h2> */}
           <LanguageSelector
             type={SectionType.From}
             value={fromLanguage}
             onChange={setFromLanguage} />
-          <textarea
-            className='w-full max-w-full h-40 min-h-full max-h-52 border border-gray-200 mt-3 rounded-lg p-4'
-            placeholder='Introducir texto'
-            autoFocus></textarea>
-          {fromLanguage}
+          <TextArea
+            type={SectionType.From}
+            value={fromText}
+            onChange={setFromText}
+            loading={loading}
+          />
+          {/* {fromLanguage} */}
         </div>
-        <div>
+        <div className='sm:flex-none'>
           <button
             disabled={fromLanguage === AUTO_LANGUAGE}
             onClick={interchangeLanguages}
-            className='px-5 py-2 font-bold capitalize rounded disabled:opacity-50'>
+            className='mt-7 px-5 py-2 font-bold capitalize rounded disabled:opacity-50'>
             <ArrowIcon />
           </button>
         </div>
-        <div>
-          <h2 className='text-xl font-bold'>To</h2>
+        <div className='sm:grow'>
+          {/* <h2 className='text-xl font-bold'>To</h2> */}
           <LanguageSelector
             type={SectionType.To}
             value={toLanguage}
             onChange={setToLanguage} />
-          <textarea
-            className='bg-gray-100 w-full max-w-full h-40 min-h-full max-h-52 border border-gray-100 mt-3 rounded-lg p-4'
-            placeholder='Traducción'
-            ></textarea>
-          {toLanguage}
+
+          <TextArea
+            type={SectionType.To}
+            value={result}
+            onChange={setResult}
+            loading={loading}
+          />
+          {/* {toLanguage} */}
         </div>
       </div>
     </div>
