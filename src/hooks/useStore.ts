@@ -1,40 +1,40 @@
-import { useReducer } from 'react'
-import { AUTO_LANGUAGE } from '../contants'
-import type { FromLanguage, Language, Action, State } from '../types.d'
+import { useReducer } from 'react';
+import { AUTO_LANGUAGE } from '../contants';
+import type { FromLanguage, Language, Action, State } from '../types.d';
 
 const initialState: State = {
   fromLanguage: 'es',
-  toLanguage: 'auto',
+  toLanguage: 'en',
   fromText: '',
   result: '',
   loading: false
-}
+};
 
 function reducer(state: State, action: Action) {
-  const { type } = action
+  const { type } = action;
 
   if (type === 'INTERCHANGE_LANGUAGES') {
-    if (state.fromLanguage === AUTO_LANGUAGE) return state
+    if (state.fromLanguage === AUTO_LANGUAGE) return state;
 
     return {
       ...state,
       fromLanguage: state.toLanguage,
       toLanguage: state.fromLanguage
-    }
+    };
   }
 
   if (type === 'SET_FROM_LANGUAGE') {
     return {
       ...state,
       fromLanguage: action.payload
-    }
+    };
   }
 
   if (type === 'SET_TO_LANGUAGE') {
     return {
       ...state,
       toLanguage: action.payload
-    }
+    };
   }
 
   if (type === 'SET_FROM_TEXT') {
@@ -43,7 +43,7 @@ function reducer(state: State, action: Action) {
       loading: true,
       fromText: action.payload,
       result: ''
-    }
+    };
   }
 
   if (type === 'SET_RESULT') {
@@ -51,10 +51,10 @@ function reducer(state: State, action: Action) {
       ...state,
       loading: false,
       result: action.payload
-    }
+    };
   }
 
-  return state
+  return state;
 }
 
 export function useStore() {
@@ -64,27 +64,27 @@ export function useStore() {
     fromText,
     result,
     loading
-  }, dispatch] = useReducer(reducer, initialState)
+  }, dispatch] = useReducer(reducer, initialState);
 
   const interchangeLanguages = () => {
-    dispatch({ type: 'INTERCHANGE_LANGUAGES' })
-  }
+    dispatch({ type: 'INTERCHANGE_LANGUAGES' });
+  };
 
   const setFromLanguage = (payload: FromLanguage) => {
-    dispatch({ type: 'SET_FROM_LANGUAGE', payload })
-  }
+    dispatch({ type: 'SET_FROM_LANGUAGE', payload });
+  };
 
   const setToLanguage = (payload: Language) => {
-    dispatch({ type: 'SET_TO_LANGUAGE', payload })
-  }
+    dispatch({ type: 'SET_TO_LANGUAGE', payload });
+  };
 
   const setFromText = (payload: string) => {
-    dispatch({ type: 'SET_FROM_TEXT', payload })
-  }
+    dispatch({ type: 'SET_FROM_TEXT', payload });
+  };
 
   const setResult = (payload: string) => {
-    dispatch({ type: 'SET_RESULT', payload })
-  }
+    dispatch({ type: 'SET_RESULT', payload });
+  };
 
   return {
     fromLanguage,
@@ -97,5 +97,5 @@ export function useStore() {
     setToLanguage,
     setFromText,
     setResult
-  }
+  };
 }

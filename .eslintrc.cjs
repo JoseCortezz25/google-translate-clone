@@ -45,9 +45,15 @@ module.exports = {
         "functions": "never"
       }
     ],
-    "no-debugger": "off"
+    "no-debugger": "off",
+    "space-before-function-paren": ["off", {
+      "anonymous": "always",
+      "named": "always",
+      "asyncArrow": "always"
+    }],
   },
   "ignorePatterns": [
     "*.cjs"
-  ]
+  ],
+  "parser": "@typescript-eslint/parser"
 }
